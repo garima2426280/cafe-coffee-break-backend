@@ -7,10 +7,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://garima-cafe.netlify.app"
-  ]
+  origin: '*'
 }));
 
 app.use(express.json());
