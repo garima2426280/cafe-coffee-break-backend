@@ -7,7 +7,10 @@ require("dotenv").config();
 const app = express();
 
 app.use(cors({
-  origin: '*'
+  origin: [
+    'http://localhost:3000',
+    'https://glittery-hummingbird-646785.netlify.app'
+  ]
 }));
 
 app.use(express.json());
