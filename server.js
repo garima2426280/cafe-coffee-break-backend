@@ -9,7 +9,8 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://glittery-hummingbird-646785.netlify.app'
+    'https://glittery-hummingbird-646785.netlify.app',
+    'https://scintillating-cat-34469f.netlify.app'
   ]
 }));
 
