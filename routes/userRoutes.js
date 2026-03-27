@@ -2,13 +2,12 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Order = require("../models/Order");
 
-// LOGIN OR REGISTER BY PHONE
 router.post("/login", async (req, res) => {
   try {
     const { phone } = req.body;
-    let user = await User.findOne({ phone });
+    let user = await User.findOne({ phone: phone.toString().trim() });
     if (!user) {
-      user = new User({ phone });
+      user = new User({ phone: phone.toString().trim() });
       await user.save();
     }
     res.json({ success: true, user });
@@ -18,10 +17,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// GET USER HISTORY BY PHONE — only that user's orders
 router.get("/history/:phone", async (req, res) => {
   try {
-    const phone = req.params.phone.trim();
+    const phone = req.params.phone.toString().trim();
     const orders = await Order.find({ phone: phone }).sort({ _id: -1 });
     res.json(orders);
   } catch (err) {
@@ -29,7 +27,6 @@ router.get("/history/:phone", async (req, res) => {
   }
 });
 
-// GET ALL USERS (admin)
 router.get("/all", async (req, res) => {
   try {
     const users = await User.find().sort({ createdAt: -1 });
